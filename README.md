@@ -183,6 +183,32 @@ Frontend/
     └── style.scss
 ```
 
+## Deploying the Frontend to Vercel
+
+Create a new Vercel project from this repository and set **Root Directory** to `Frontend`.
+Vercel will detect the Vite project automatically. The included `Frontend/vercel.json`
+configures the SPA fallback required by React Router, so direct links such as
+`/interview/:interviewId` continue to work after deployment.
+
+Use these project settings if Vercel does not detect them automatically:
+
+```text
+Framework Preset: Vite
+Build Command: npm run build
+Output Directory: dist
+Install Command: npm install
+```
+
+Before deploying, update the API base URL in these files from the local backend URL to
+the deployed backend URL:
+
+- `Frontend/src/features/auth/services/auth.api.js`
+- `Frontend/src/features/interview/services/interview.api.js`
+
+Also update the backend CORS origin in `Backend/src/app.js` to the deployed Vercel URL.
+The backend must be deployed separately because Vercel is only configured for the Vite
+frontend.
+
 ## License
 
 No license has been selected for this project yet.
